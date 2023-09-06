@@ -1,37 +1,29 @@
 function getComputerChoice(){
 choices = ["rock", "paper", "scissors"];
-i = Math.floor(Math.random()*3);
-return choices[i];
-}
-function playerChoice(){
-    playerSelection = (prompt("Enter your choice:")).toLowerCase();
-    console.log(playerSelection.toString()) ;
-    
+return choices[Math.floor(Math.random() * choices.length)];
 }
 
-function playRound(playerSelection, computerSelection){
-    var player = 0; var comp = 0;
-    if(playerSelection == computerSelection){
-        return "Its a draw!";
-    } else if(  (playerSelection == "rock" && computerSelection=="paper") || 
-                (playerSelection == "paper" && computerSelection=="scissors") || (
-                 playerSelection == "scissors" && computerSelection=="paper")){
-                    player += 1;
-        return "You Won! "+playerSelection+" beats "+computerSelection;
-    } else if((computerSelection == "rock" && playerSelection=="paper") || 
-    (computerSelection == "paper" && playerSelection=="scissors") || (
-     computerSelection == "scissors" && playerSelection=="paper")
-    ){
-        comp += 1;
-        return "You Lose! "+computerSelection+" beats "+playerSelection;
-    } 
+function playerChoice(){ 
+    return prompt("Enter your choice: ");
 }
 
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+      return "It's a draw!";
+    } else if (
+      (playerSelection === "rock" && computerSelection === "scissors") ||
+      (playerSelection === "paper" && computerSelection === "rock") ||
+      (playerSelection === "scissors" && computerSelection === "paper")
+    ) {
+      return "You win! " + playerSelection + " beats " + computerSelection;
+    } else {
+      return "You lose! " + computerSelection + " beats " + playerSelection;
+    }
+  }
 
+function run(){
+    comp = getComputerChoice();
+    player = playerChoice()
+    return playRound(player, comp);
 
-// console.log(playRound(playerSelection, computerSelection));
-function game(){
-        computerSelection = getComputerChoice();
-        playerSelection = playerChoice();
-        playRound(playerSelection, computerSelection);
 }
